@@ -2,6 +2,7 @@
 
 
 [![Demo](https://img.shields.io/badge/Demo-Live-green?style=for-the-badge)](https://leowahatta.github.io/CV_LeoWahatta)
+
 Selamat datang di personal web CV saya!  
 Web ini dirancang sebagai landing page profesional untuk menampilkan pengalaman, pendidikan, dan keahlian saya secara interaktif dan modern.
 
