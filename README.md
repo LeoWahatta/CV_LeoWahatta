@@ -12,6 +12,14 @@ Web ini dirancang sebagai landing page profesional untuk menampilkan pengalaman,
 
 ## 🆕 What's New
 
+### 🎨 Theme Switcher & Catppuccin Palette
+- **Theme Toggle**: Slider tema di navbar untuk beralih antara Dark Mode (Mocha) dan Light Mode (Latte)
+- **Catppuccin Mocha** (Dark): Warna dominan `#1e1e2e` dengan accent oranye `#fab387`
+- **Catppuccin Latte** (Light): Warna dominan `#f4ede8` dengan accent cokelat `#df8e1d`
+- Pilihan tema tersimpan otomatis di browser (localStorage)
+- Icon dark mode (🌙) dan light mode (☀️) untuk indikator visual
+- Terintegrasi responsif dengan hamburger menu di mobile
+
 ### 🔍 SEO Optimized
 - Meta tag `description`, `keywords`, dan `author` untuk search engine
 - Open Graph & Twitter Card untuk pratinjau sosial media
