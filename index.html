@@ -54,13 +54,41 @@
   <style>
     /* Variabel warna dan ukuran global */
     :root {
-      --bg-color: #0f111a;
-      --text-color: #ffffff;
-      --accent-color: #ff4b5c;
-      --card-bg: #1a1c2c;
+      --bg-color: #1e1e2e;
+      --text-color: #cdd6f4;
+      --accent-color: #fab387;
+      --card-bg: #313244;
+      --nav-bg: #45475a;
+      --muted-color: #a6adc8;
+      --footer-color: #bac2de;
+      --button-text-color: #1e1e2e;
       --border-radius: 10px;
       --max-width: 1100px;
-    }/* Reset dan standar layout */
+    }
+
+    body.theme-latte {
+      --bg-color: #f4ede8;
+      --text-color: #575268;
+      --accent-color: #df8e1d;
+      --card-bg: #f2d5cf;
+      --nav-bg: #e5d4c7;
+      --muted-color: #6b6580;
+      --footer-color: #6b6580;
+      --button-text-color: #1e1e2e;
+    }
+
+    body.theme-mocha {
+      --bg-color: #1e1e2e;
+      --text-color: #cdd6f4;
+      --accent-color: #fab387;
+      --card-bg: #313244;
+      --nav-bg: #45475a;
+      --muted-color: #a6adc8;
+      --footer-color: #bac2de;
+      --button-text-color: #1e1e2e;
+    }
+
+/* Reset dan standar layout */
 * {
   margin: 0;
   padding: 0;
@@ -80,7 +108,7 @@ body {
 
 /* Navigasi utama */
 nav {
-  background-color: #0c0e18;
+  background-color: var(--nav-bg);
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -102,6 +130,61 @@ nav {
   color: var(--text-color);
 }
 
+.theme-switcher {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-color);
+  font-size: 0.9rem;
+}
+
+.theme-switcher.nav-theme {
+  margin-left: auto;
+}
+
+.theme-switcher .switch {
+  position: relative;
+  display: inline-block;
+  width: 52px;
+  height: 28px;
+}
+
+.theme-switcher input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+
+.theme-switcher .slider {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  transition: background 0.3s;
+}
+
+.theme-switcher .slider::before {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: 4px;
+  width: 20px;
+  height: 20px;
+  background: #ffffff;
+  border-radius: 50%;
+  transition: transform 0.3s;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.theme-switcher input:checked + .slider {
+  background: rgba(0, 0, 0, 0.25);
+}
+
+.theme-switcher input:checked + .slider::before {
+  transform: translateX(24px);
+}
+
 /* Tombol hamburger (mobile) */
 .hamburger {
   display: none;
@@ -113,6 +196,7 @@ nav {
 .nav-links {
   display: flex;
   gap: 30px;
+  align-items: center;
 }
 
 .nav-links a {
@@ -134,7 +218,7 @@ nav {
   .nav-links {
     display: none;
     flex-direction: column;
-    background-color: #0c0e18;
+    background-color: var(--nav-bg);
     position: absolute;
     top: 60px;
     right: 0;
@@ -145,6 +229,13 @@ nav {
   }
   .nav-links.active {
     display: flex;
+  }
+  .nav-links .theme-switcher.nav-theme {
+    margin-left: 0;
+    justify-content: center;
+    padding: 15px 0;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    width: 100%;
   }
 }
 
@@ -160,7 +251,7 @@ header h1 {
 }
 
 header p {
-  color: #bbb;
+  color: var(--muted-color);
   max-width: 600px;
   margin: 0 auto 30px;
 }
@@ -169,7 +260,7 @@ header p {
   background: var(--accent-color);
   border: none;
   padding: 12px 25px;
-  color: white;
+  color: var(--button-text-color);
   font-weight: bold;
   border-radius: var(--border-radius);
   cursor: pointer;
@@ -177,7 +268,7 @@ header p {
 }
 
 .btn-primary:hover {
-  background: #e33d4f;
+  background: rgba(250, 179, 135, 0.9);
 }
 
 /* Section umum */
@@ -255,7 +346,7 @@ section {
 footer {
   text-align: center;
   padding: 30px;
-  color: #888;
+  color: var(--footer-color);
   font-size: 0.9rem;
 }
 
@@ -273,7 +364,7 @@ footer {
 }
 
 .education-card p {
-  color: #ccc;
+  color: var(--muted-color);
   font-size: 0.95rem;
 }
 
@@ -283,14 +374,8 @@ footer {
   <!-- Navigasi Atas -->
   <nav data-aos="fade-down">
     <div class="nav-container">
-      <div class="logo">Leo Wahata</div>
-      <div class="theme-switcher">
-        <span class="theme-label">Mocha</span>
-        <label class="switch">
-          <input type="checkbox" id="themeToggle" aria-label="Toggle theme" />
-          <span class="slider"></span>
-        </label>
-      </div>      <div class="hamburger" onclick="toggleMenu()">
+        <div class="logo">Leo Wahata</div>
+      <div class="hamburger" onclick="toggleMenu()">
         <i class="fas fa-bars"></i>
       </div>
       <div class="nav-links" id="navLinks">
@@ -299,6 +384,13 @@ footer {
         <a href="#pendidikan">Pendidikan</a>
         <a href="#skills">Keahlian</a>
         <a href="#contact">Kontak</a>
+        <div class="theme-switcher nav-theme">
+          <span class="theme-label"><i class="fas fa-moon"></i></span>
+          <label class="switch">
+            <input type="checkbox" id="themeToggle" aria-label="Toggle theme" />
+            <span class="slider"></span>
+          </label>
+        </div>
       </div>
     </div>
   </nav>  <!-- Header Utama -->  <header>
@@ -391,6 +483,39 @@ footer {
           navLinks.classList.remove('active');
         }
       });
+    });
+
+    const themeToggle = document.getElementById('themeToggle');
+    const themeLabel = document.querySelector('.theme-switcher .theme-label');
+
+    function applyTheme(theme) {
+      document.body.classList.toggle('theme-latte', theme === 'latte');
+      document.body.classList.toggle('theme-mocha', theme === 'mocha');
+      themeToggle.checked = theme === 'latte';
+      if (themeLabel) {
+        themeLabel.innerHTML = theme === 'latte' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+      }
+    }
+
+    function saveTheme(theme) {
+      try {
+        localStorage.setItem('cvTheme', theme);
+      } catch (error) {
+        // ignore localStorage errors
+      }
+    }
+
+    function loadTheme() {
+      const storedTheme = localStorage.getItem('cvTheme');
+      return storedTheme === 'latte' ? 'latte' : 'mocha';
+    }
+
+    applyTheme(loadTheme());
+
+    themeToggle.addEventListener('change', () => {
+      const theme = themeToggle.checked ? 'latte' : 'mocha';
+      applyTheme(theme);
+      saveTheme(theme);
     });
   </script></body>
 </html>
